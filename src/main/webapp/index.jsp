@@ -20,27 +20,27 @@
             <tr>
                 <td>Create document</td>
                 <td>POST</td>
-                <td><a href="rest/data">rest/data</a></td>
+                <td><a href="rest/content-server/content">rest/content-server/content</a></td>
             </tr>
             <tr>
                 <td>List documents</td>
                 <td>GET</td>
-                <td><a href="rest/data">rest/data</a></td>
+                <td><a href="rest/content-server/content">rrest/content-server/content</a></td>
             </tr>
             <tr>
                 <td>Read document</td>
                 <td>GET</td>
-                <td><a href="rest/data/id">rest/data/{id}</a></td>
+                <td><a href="rest/content-server/content">rest/content-server/content/{id}</a></td>
             </tr>
             <tr>
                 <td>Replace document</td>
                 <td>PUT</td>
-                <td><a href="rest/data/id">rest/data/{id}</a></td>
+                <td><a href="rest/content-server/content/id">rest/content-server/content/{id}</a></td>
             </tr>
             <tr>
                 <td>Delete document</td>
                 <td>DELETE</td>
-                <td><a href="rest/data/id">rest/data/{id}</a></td>
+                <td><a href="rest/content-server/content/id">rest/content-server/content/{id}</a></td>
             </tr>
         </table>
 

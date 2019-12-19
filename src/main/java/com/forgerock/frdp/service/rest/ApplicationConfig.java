@@ -3,7 +3,7 @@
  * Use subject to license terms.
  */
 
-package com.forgerock.frdp.contentserver.rest;
+package com.forgerock.frdp.service.rest;
 
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
@@ -28,7 +28,7 @@ public class ApplicationConfig extends Application {
     * this method in getClasses().
     */
    private void addRestResourceClasses(Set<Class<?>> resources) {
-      resources.add(com.forgerock.frdp.contentserver.rest.DataResource.class);
+      resources.add(com.forgerock.frdp.service.rest.JsonResource.class);
    }
 
 }
