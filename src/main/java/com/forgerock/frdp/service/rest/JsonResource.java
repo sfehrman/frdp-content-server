@@ -635,11 +635,10 @@ public class JsonResource extends Resource {
     * @return String parameter path value
     */
    private String getParamPathValue(final String name) {
-      Object obj = null;
       String METHOD = Thread.currentThread().getStackTrace()[1].getMethodName();
       String value = null;
-      MultivaluedMap mvMap = null;
-      List list = null;
+      MultivaluedMap<String, String> mvMap = null;
+      List<String> list = null;
 
       _logger.entering(CLASS, METHOD);
 
@@ -653,14 +652,11 @@ public class JsonResource extends Resource {
          this.abort(CLASS + ": " + METHOD, ": Path parameters are empty.", Status.BAD_REQUEST);
       }
 
-      obj = mvMap.get(name);
+      list = mvMap.get(name);
 
-      if (obj != null && obj instanceof List) {
-         list = (List) obj;
-         obj = list.get(0);
-         if (obj != null && obj instanceof String && !STR.isEmpty((String) obj)) {
-            value = (String) obj;
-         } else {
+      if (list != null && list.size() > 0) {
+         value = list.get(0);
+         if (STR.isEmpty(value)) {
             this.abort(CLASS + ": " + METHOD, ": Path value for '" + name + "' is empty.", Status.BAD_REQUEST);
          }
       } else {
@@ -683,32 +679,30 @@ public class JsonResource extends Resource {
     * @param oper OpertaionIF object
     */
    private void setParameters(final OperationIF oper) {
-      Object obj = null;
       String METHOD = Thread.currentThread().getStackTrace()[1].getMethodName();
-      MultivaluedMap pathParams = null;
-      List list = null;
+      String value = null;
+      MultivaluedMap<String, String> pathParams = null;
+      List<String> list = null;
 
       _logger.entering(CLASS, METHOD);
 
       pathParams = _uriInfo.getPathParameters();
 
       if (pathParams != null && !pathParams.isEmpty()) {
-         obj = pathParams.get(ConstantsIF.DATABASE);
-         if (obj != null && obj instanceof List && !((List) obj).isEmpty()) {
-            list = (List) obj;
-            obj = list.get(0);
+         list = pathParams.get(ConstantsIF.DATABASE);
+         if (list != null && !list.isEmpty()) {
+            value = list.get(0);
 
-            if (obj != null && obj instanceof String && !STR.isEmpty((String) obj)) {
-               oper.setParam(MongoDataAccess.PARAM_DATABASE, (String) obj);
+            if (!STR.isEmpty(value)) {
+               oper.setParam(MongoDataAccess.PARAM_DATABASE, value);
             }
          }
-         obj = pathParams.get(ConstantsIF.COLLECTION);
-         if (obj != null && obj instanceof List && !((List) obj).isEmpty()) {
-            list = (List) obj;
-            obj = list.get(0);
+         list = pathParams.get(ConstantsIF.COLLECTION);
+         if (list != null && !list.isEmpty()) {
+            value = list.get(0);
 
-            if (obj != null && obj instanceof String && !STR.isEmpty((String) obj)) {
-               oper.setParam(MongoDataAccess.PARAM_COLLECTION, (String) obj);
+            if (!STR.isEmpty(value)) {
+               oper.setParam(MongoDataAccess.PARAM_COLLECTION, value);
             }
          }
       }

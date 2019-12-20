@@ -8,8 +8,9 @@ ForgeRock Demonstration Platform : **Content Server** : A deployable web service
 
 The following items must be installed:
 
-1. [Apache Maven](https://maven.apache.org/)
+1. [Apache Maven](https://maven.apache.org/) *(tested with 3.5.x, 3.6.x)*
 1. [Java Development Kit 8](https://openjdk.java.net/)
+1. [Apache Tomcat](https://tomcat.apache.org/index.html) *(tested with Tomcat 8.5.x)*
 
 # Build
 
