@@ -51,7 +51,7 @@
     </dependencies>
 
     <build>
-        <finalName>content</finalName>
+        <finalName>content-server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
