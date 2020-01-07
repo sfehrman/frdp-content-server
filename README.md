@@ -86,7 +86,7 @@ This example deploys the `content-server.war` file to an Apache Tomcat 8.x envir
 Copy the `content-server.war` file to the `webapps` folder in the Tomcat server installation.  The running Tomcat server will automatically unpack the war file.
 
 ```
-cp ./target/content.war TOMCAT_INSTALLATION/webapps
+cp ./target/content-server.war TOMCAT_INSTALLATION/webapps
 ```
 
 The deployed application needs to be configured for the MongoDB installation.  Edit the `content-server.json` file and change /check the values.
