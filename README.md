@@ -144,7 +144,7 @@ Use `curl` to execute a HTTP POST method.  The URL will end at the "collection" 
 curl -v -X POST \
 -H "Content-type: application/json" \
 -d '{"firstname": "James","lastname": "Bond"}' \
-https://FQDN/tomcat/content-server/rest/content-server/content
+http://FQDN/content-server/rest/content-server/content
 ```
 
 ### Response:
@@ -152,12 +152,12 @@ https://FQDN/tomcat/content-server/rest/content-server/content
 The JSON document is created in the MongoDB database / collect (`content-server/content`).  The new documents `uid` id returned in the HTTP Response Header `Location`
 
 ```bash
-> POST /tomcat/content-server/rest/content-server/content HTTP/1.1
+> POST /content-server/rest/content-server/content HTTP/1.1
 > Content-type: application/json
 > Content-Length: 41
 
 < HTTP/1.1 201 
-< Location: https://FQDN/tomcat/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc
+< Location: http://FQDN/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc
 ```
 
 ## SEARCH
@@ -169,7 +169,7 @@ Use `curl` to execute a HTTP GET method. The URL will end at the "collection" (`
 ```bash
 curl -v -X GET \
 -H "Accept: application/json" \
-https://FQDN/tomcat/content-server/rest/content-server/content
+http://FQDN/content-server/rest/content-server/content
 ```
 
 ### Response:
@@ -180,7 +180,7 @@ All of the JSON document unique identifiers will be returned.  The response will
 - `results`: Array : document uids
 
 ```bash
-> GET /tomcat/charlie/content-server/rest/content-server/content HTTP/1.1
+> GET /charlie/content-server/rest/content-server/content HTTP/1.1
 > Accept: application/json
 
 < HTTP/1.1 200 
@@ -210,7 +210,7 @@ Use `curl` to execute a HTTP GET method. The URL will end at the "collection" (`
 ```bash
 curl -v -X GET \
 -H "Accept: application/json" \
-https://FQDN/tomcat/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc
+http://FQDN/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc
 ```
 
 ### Response:
@@ -222,7 +222,7 @@ The JSON document for the specified unique identifiers will be returned.  The re
 - `timestamps`: Object: date/time Attributes (like `created`)
 
 ```bash
-> GET /tomcat/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc HTTP/1.1
+> GET /content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc HTTP/1.1
 > Accept: application/json
 
 < HTTP/1.1 200 
@@ -257,13 +257,13 @@ Use `curl` to execute a HTTP PUT method. The URL will end at the "collection" (`
 curl -v -X PUT \
 -H "Content-type: application/json" \
 -d '{"firstname": "James","lastname": "Bond","title": "Secret Agent","org": "MI6","weapon": "Walther PPK"}' \
-https://FQDN/tomcat/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc
+http://FQDN/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc
 ```
 
 ### Response:
 
 ```bash
-> PUT /tomcat/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc HTTP/1.1
+> PUT /content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc HTTP/1.1
 > Content-type: application/json
 > Content-Length: 102
 
@@ -297,13 +297,13 @@ Use `curl` to execute a HTTP DELETE method. The URL will end at the "collection"
 
 ```bash
 curl -v -X DELETE \
-https://FQDN/tomcat/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc
+http://FQDN/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc
 ```
 
 ### Response:
 
 ```bash
-> DELETE /tomcat/charlie/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc HTTP/1.1
+> DELETE /charlie/content-server/rest/content-server/content/e538bad7-8066-46f7-8e8f-ac36185aa2dc HTTP/1.1
 
 < HTTP/1.1 204 
 ```
