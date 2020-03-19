@@ -113,7 +113,7 @@ The default values:
 
 ```json
 {
-   "host": "127.0.0.1",
+   "host": "cs.example.com",
    "port": "27017",
    "database": "content-server",
    "authen": {
