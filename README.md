@@ -132,6 +132,8 @@ The default values:
 }
 ```
 
+Restart Tomcat server.
+
 # Test
 
 ## CREATE
