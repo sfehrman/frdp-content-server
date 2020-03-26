@@ -32,25 +32,23 @@ The following items must be completed, in order:
 
 ## Clean, Compile, Package:
 
-Run *Maven* (`mvn`) processes to clean, compile, package:
+Run *Maven* (`mvn`) processes: clean, compile, package to generate the deployable war file:
 
 ```bash
-mvn clean
-mvn compile 
-mvn package
+mvn clean compile package
 ```
 
 The *package* process creates a deployable war file, in the current directory: `./target/content-server.war`: 
 
 ```bash
 ls -la ./target
-total 11888
-drwxrwxr-x 5 forgerock forgerock       73 Dec 19 16:00 .
-drwxrwxr-x 5 forgerock forgerock      118 Dec 19 15:59 ..
-drwxrwxr-x 3 forgerock forgerock       16 Dec 19 15:59 classes
-drwxrwxr-x 4 forgerock forgerock       51 Dec 19 16:00 content-server
--rw-rw-r-- 1 forgerock forgerock 12170899 Dec 19 16:00 content-server.war
-drwxrwxr-x 2 forgerock forgerock       27 Dec 19 16:00 maven-archiver
+total 12016
+drwxrwxr-x. 5 forgerock forgerock       87 Mar 26 17:24 .
+drwxrwxr-x. 5 forgerock forgerock      101 Mar 26 17:24 ..
+drwxrwxr-x. 3 forgerock forgerock       16 Mar 26 17:24 classes
+drwxrwxr-x. 4 forgerock forgerock       94 Mar 26 17:24 content-server
+-rw-rw-r--. 1 forgerock forgerock 12303779 Mar 26 17:24 content-server.war
+drwxrwxr-x. 2 forgerock forgerock       27 Mar 26 17:24 maven-archiver
 ```
 
 # Configure MongoDB
