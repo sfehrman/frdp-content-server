@@ -25,7 +25,7 @@
             <tr>
                 <td>List documents</td>
                 <td>GET</td>
-                <td><a href="rest/content-server/content">rrest/content-server/content</a></td>
+                <td><a href="rest/content-server/content">rest/content-server/content</a></td>
             </tr>
             <tr>
                 <td>Read document</td>

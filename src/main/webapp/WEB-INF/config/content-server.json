@@ -1,5 +1,5 @@
 {
-   "host": "mongo",
+   "host": "cs.example.com",
    "port": "27017",
    "database": "content-server",
    "authen": {
