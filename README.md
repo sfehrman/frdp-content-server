@@ -17,9 +17,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 The following items must be installed:
 
 1. [Apache Maven](https://maven.apache.org/) *(tested with 3.5.x, 3.6.x)*
-1. [Java Development Kit 8](https://openjdk.java.net/)
+1. [Java Development Kit 11](https://openjdk.java.net/projects/jdk/11/)
 1. [MongoDB](https://www.mongodb.com) *(tested with 3.2)*
-1. [Apache Tomcat](https://tomcat.apache.org/index.html) *(tested with Tomcat 8.5.x)*
+1. [Apache Tomcat](https://tomcat.apache.org/index.html) *(tested with Tomcat 9.0.x)*
 
 # Build
 

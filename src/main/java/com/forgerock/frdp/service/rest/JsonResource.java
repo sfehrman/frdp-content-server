@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2018-2019, ForgeRock, Inc., All rights reserved
+ * Copyright (c) 2018-2020, ForgeRock, Inc., All rights reserved
  * Use subject to license terms.
  */
-
 package com.forgerock.frdp.service.rest;
 
 import com.forgerock.frdp.common.BasicData;
@@ -50,7 +49,7 @@ import org.json.simple.parser.JSONParser;
  * PUT .../rest/json/{database}/{collection}/{id}
  * DELETE .../rest/json/{database}/{collection}/{id}
  * </pre>
- * 
+ *
  * @author Scott Fehrman, ForgeRock, Inc.
  *
  */
@@ -66,9 +65,6 @@ public class JsonResource extends Resource {
    private static final String PARAM_PUT_CREATE = "put.create";
    private static final Boolean DEFAULT_PUT_CREATE = false;
 
-   /**
-    * Default constructor
-    */
    public JsonResource() {
       super();
 
@@ -82,7 +78,7 @@ public class JsonResource extends Resource {
 
    /**
     * Create a JSON document. Data is provided in the body.
-    * 
+    *
     * @param data String representation of JSON document
     * @return Response HTTP response
     */
@@ -101,7 +97,7 @@ public class JsonResource extends Resource {
       _logger.entering(CLASS, METHOD);
 
       if (_logger.isLoggable(DEBUG_LEVEL)) {
-         _logger.log(DEBUG_LEVEL, "json=''{0}''", new Object[] { data != null ? data : NULL });
+         _logger.log(DEBUG_LEVEL, "json=''{0}''", new Object[]{data != null ? data : NULL});
       }
 
       if (STR.isEmpty(data)) {
@@ -109,17 +105,16 @@ public class JsonResource extends Resource {
       }
 
       // Convert the String (data) into a JSONObject
-
       parser = this.getParserFromCtx(_servletCtx);
 
       try {
          jsonData = (JSONObject) parser.parse(data);
       } catch (Exception ex) {
-         this.abort(CLASS + ": " + METHOD, "Could not parser String to JSON: '" + data + "'", Status.BAD_REQUEST);
+         this.abort(CLASS + ": " + METHOD, "Could not parser String to JSON: '"
+            + data + "'", Status.BAD_REQUEST);
       }
 
       // Build "create" Operation and execute using DAO
-
       dao = this.getDAO();
 
       jsonInput = new JSONObject();
@@ -133,7 +128,6 @@ public class JsonResource extends Resource {
       operOutput = dao.execute(operInput);
 
       // Get the HTTP response
-
       response = this.getResponseFromJSON(_uriInfo, operOutput);
 
       _logger.exiting(CLASS, METHOD);
@@ -142,7 +136,8 @@ public class JsonResource extends Resource {
    }
 
    /**
-    * Search JSON documents. This implementation currently returns all documents.
+    * Search JSON documents. This implementation currently returns all
+    * documents.
     *
     * @return Response HTTP response
     */
@@ -160,7 +155,6 @@ public class JsonResource extends Resource {
       _logger.entering(CLASS, METHOD);
 
       // Build "search" Operation and execute using DAO
-
       dao = this.getDAO();
 
       jsonQuery = new JSONObject();
@@ -177,7 +171,6 @@ public class JsonResource extends Resource {
       operOutput = dao.execute(operInput);
 
       // Get the HTTP response
-
       response = this.getResponseFromJSON(_uriInfo, operOutput);
 
       _logger.exiting(CLASS, METHOD);
@@ -187,7 +180,7 @@ public class JsonResource extends Resource {
 
    /**
     * Read a JSON document.
-    * 
+    *
     * @param uid String document uid, via path parameter
     * @return Response http response
     */
@@ -205,15 +198,15 @@ public class JsonResource extends Resource {
       _logger.entering(CLASS, METHOD);
 
       if (_logger.isLoggable(DEBUG_LEVEL)) {
-         _logger.log(DEBUG_LEVEL, "uid=''{0}''", new Object[] { uid != null ? uid : NULL });
+         _logger.log(DEBUG_LEVEL, "uid=''{0}''", new Object[]{uid != null ? uid : NULL});
       }
 
       if (STR.isEmpty(uid)) {
-         this.abort(CLASS + ": " + METHOD, "Path parameter '" + ConstantsIF.UID + "' is empty", Status.BAD_REQUEST);
+         this.abort(CLASS + ": " + METHOD, "Path parameter '" + ConstantsIF.UID
+            + "' is empty", Status.BAD_REQUEST);
       }
 
       // Build "read" Operation and execute using DAO
-
       dao = this.getDAO();
 
       jsonInput = new JSONObject();
@@ -227,7 +220,6 @@ public class JsonResource extends Resource {
       operOutput = dao.execute(operInput);
 
       // Get the HTTP response
-
       response = this.getResponseFromJSON(_uriInfo, operOutput);
 
       _logger.exiting(CLASS, METHOD);
@@ -237,8 +229,8 @@ public class JsonResource extends Resource {
 
    /**
     * Replace the JSON document.
-    * 
-    * @param str String representation of JSON document
+    *
+    * @param data String representation of JSON document
     * @param uid String document uid, via path parameter
     * @return Response http response
     */
@@ -261,15 +253,17 @@ public class JsonResource extends Resource {
 
       if (_logger.isLoggable(DEBUG_LEVEL)) {
          _logger.log(DEBUG_LEVEL, "uid=''{0}'', json=''{1}''",
-               new Object[] { uid != null ? uid : NULL, data != null ? data : NULL });
+            new Object[]{uid != null ? uid : NULL, data != null ? data : NULL});
       }
 
       if (STR.isEmpty(data)) {
-         this.abort(CLASS + ": " + METHOD, "Payload string is empty", Status.BAD_REQUEST);
+         this.abort(CLASS + ": " + METHOD, "Payload string is empty", 
+            Status.BAD_REQUEST);
       }
 
       if (STR.isEmpty(uid)) {
-         this.abort(CLASS + ": " + METHOD, "Path parameter '" + ConstantsIF.UID + "' is empty", Status.BAD_REQUEST);
+         this.abort(CLASS + ": " + METHOD, "Path parameter '" + ConstantsIF.UID
+            + "' is empty", Status.BAD_REQUEST);
       }
 
       parser = this.getParserFromCtx(_servletCtx);
@@ -277,12 +271,12 @@ public class JsonResource extends Resource {
       try {
          jsonData = (JSONObject) parser.parse(data);
       } catch (Exception ex) {
-         this.abort(CLASS + ": " + METHOD, "Could not parser String to JSON: '" + data + "', " + ex.getMessage(),
-               Status.BAD_REQUEST);
+         this.abort(CLASS + ": " + METHOD, "Could not parser String to JSON: '"
+            + data + "', " + ex.getMessage(),
+            Status.BAD_REQUEST);
       }
 
       // Build "replace" Operation and execute using DAO
-
       dao = this.getDAO();
 
       jsonInput = new JSONObject();
@@ -318,13 +312,11 @@ public class JsonResource extends Resource {
             operOutput = dao.execute(operInput);
 
             // Flag operation was replace, this is required to get proper response
-
             operOutput.setObject(true);
          }
       }
 
       // Get the HTTP response
-
       response = this.getResponseFromJSON(_uriInfo, operOutput);
 
       _logger.exiting(CLASS, METHOD);
@@ -334,7 +326,7 @@ public class JsonResource extends Resource {
 
    /**
     * Delete the JSON document.
-    * 
+    *
     * @param uid String document uid, via path parameter
     * @return Response http response
     */
@@ -351,15 +343,15 @@ public class JsonResource extends Resource {
       _logger.entering(CLASS, METHOD);
 
       if (_logger.isLoggable(DEBUG_LEVEL)) {
-         _logger.log(DEBUG_LEVEL, "uid=''{0}''", new Object[] { uid != null ? uid : NULL });
+         _logger.log(DEBUG_LEVEL, "uid=''{0}''", new Object[]{uid != null ? uid : NULL});
       }
 
       if (STR.isEmpty(uid)) {
-         this.abort(CLASS + ": " + METHOD, "Path parameter '" + ConstantsIF.UID + "' is empty", Status.BAD_REQUEST);
+         this.abort(CLASS + ": " + METHOD, "Path parameter '" + ConstantsIF.UID
+            + "' is empty", Status.BAD_REQUEST);
       }
 
       // Build "delete" Operation and execute using DAO
-
       dao = this.getDAO();
 
       jsonInput = new JSONObject();
@@ -373,7 +365,6 @@ public class JsonResource extends Resource {
       operOutput = dao.execute(operInput);
 
       // Get the HTTP response
-
       response = this.getResponseFromJSON(_uriInfo, operOutput);
 
       _logger.exiting(CLASS, METHOD);
@@ -381,15 +372,6 @@ public class JsonResource extends Resource {
       return response;
    }
 
-   /*
-    * =============== PRIVATE METHODS ===============
-    */
-
-   /**
-    * Get the MongoDB Data Access Object from the Servlet Context.
-    * 
-    * @return DataAccessIF DAO for MongoDB
-    */
    private DataAccessIF getDAO() {
       Object obj = null;
       String METHOD = Thread.currentThread().getStackTrace()[1].getMethodName();
@@ -435,17 +417,6 @@ public class JsonResource extends Resource {
       return dao;
    }
 
-   /**
-    * Get configuration data based on the URL path parameters.
-    * 
-    * <pre>
-    * .../rest/{database}/{collection}
-    * </pre>
-    * 
-    * @param database   String MongoDB database name
-    * @param collection String MongoDB collection name
-    * @return DataIF configuration data
-    */
    private DataIF getConfigDataForDAO(final String database, final String collection) {
       boolean foundDb = false;
       boolean foundColl = false;
@@ -473,11 +444,12 @@ public class JsonResource extends Resource {
 
       if (_logger.isLoggable(DEBUG_LEVEL)) {
          _logger.log(DEBUG_LEVEL, "database=''{0}'', collection=''{1}''",
-               new Object[] { database != null ? database : NULL, collection != null ? collection : NULL });
+            new Object[]{database != null ? database : NULL, collection != null ? collection : NULL});
       }
 
       if (STR.isEmpty(database) || STR.isEmpty(collection)) {
-         this.abort(CLASS + ": " + METHOD, "Argument 'database' or 'collection' is empty.", Status.BAD_REQUEST);
+         this.abort(CLASS + ": " + METHOD, "Argument 'database' or 'collection' is empty.", 
+            Status.BAD_REQUEST);
       }
 
       parser = this.getParserFromCtx(_servletCtx);
@@ -511,12 +483,14 @@ public class JsonResource extends Resource {
                         break;
                      }
                   } else {
-                     this.abort(CLASS + ": " + METHOD, "Attribute '" + ConstantsIF.DATABASE + "' is missing.",
-                           Status.BAD_REQUEST);
+                     this.abort(CLASS + ": " + METHOD, "Attribute '"
+                        + ConstantsIF.DATABASE + "' is missing.",
+                        Status.BAD_REQUEST);
                   }
                } else {
-                  this.abort(CLASS + ": " + METHOD, "Config file '" + configName + "' is not a JSON Object",
-                        Status.BAD_REQUEST);
+                  this.abort(CLASS + ": " + METHOD, "Config file '" + configName
+                     + "' is not a JSON Object",
+                     Status.BAD_REQUEST);
                }
             }
          }
@@ -550,11 +524,13 @@ public class JsonResource extends Resource {
                }
 
             } else {
-               this.abort(CLASS + ": " + METHOD, "Collection '" + collection + "' does not exist", Status.BAD_REQUEST);
+               this.abort(CLASS + ": " + METHOD, "Collection '" + collection
+                  + "' does not exist", Status.BAD_REQUEST);
             }
          } else {
-            this.abort(CLASS + ": " + METHOD, "Object '" + ConstantsIF.COLLECTIONS + "' is missing or empty",
-                  Status.BAD_REQUEST);
+            this.abort(CLASS + ": " + METHOD, "Object '" + ConstantsIF.COLLECTIONS
+               + "' is missing or empty",
+               Status.BAD_REQUEST);
          }
 
          if (foundColl) {
@@ -568,24 +544,27 @@ public class JsonResource extends Resource {
             if (obj != null && obj instanceof String && !STR.isEmpty((String) obj)) {
                config.setParam(ConstantsIF.HOST, (String) obj);
             } else {
-               this.abort(CLASS + ": " + METHOD, "Attribute '" + ConstantsIF.HOST + "' is missing.",
-                     Status.BAD_REQUEST);
+               this.abort(CLASS + ": " + METHOD, "Attribute '" + ConstantsIF.HOST
+                  + "' is missing.",
+                  Status.BAD_REQUEST);
             }
 
             obj = jsonConfig.get(ConstantsIF.PORT);
             if (obj != null && obj instanceof String && !STR.isEmpty((String) obj)) {
                config.setParam(ConstantsIF.PORT, (String) obj);
             } else {
-               this.abort(CLASS + ": " + METHOD, "Attribute '" + ConstantsIF.PORT + "' is missing.",
-                     Status.BAD_REQUEST);
+               this.abort(CLASS + ": " + METHOD, "Attribute '" + ConstantsIF.PORT
+                  + "' is missing.",
+                  Status.BAD_REQUEST);
             }
 
             obj = jsonConfig.get(ConstantsIF.AUTHEN);
             if (obj != null && obj instanceof JSONObject) {
                jsonAuthen = (JSONObject) obj;
             } else {
-               this.abort(CLASS + ": " + METHOD, "JSON Object '" + ConstantsIF.AUTHEN + "' is missing.",
-                     Status.BAD_REQUEST);
+               this.abort(CLASS + ": " + METHOD, "JSON Object '" + ConstantsIF.AUTHEN
+                  + "' is missing.",
+                  Status.BAD_REQUEST);
             }
 
             obj = jsonAuthen.get(ConstantsIF.USER);
@@ -593,7 +572,8 @@ public class JsonResource extends Resource {
                config.setParam(ConstantsIF.AUTHEN + "." + ConstantsIF.USER, (String) obj);
             } else {
                this.abort(CLASS + ": " + METHOD,
-                     "Attribute '" + ConstantsIF.AUTHEN + "." + ConstantsIF.USER + "' is missing.", Status.BAD_REQUEST);
+                  "Attribute '" + ConstantsIF.AUTHEN + "." + ConstantsIF.USER
+                  + "' is missing.", Status.BAD_REQUEST);
             }
 
             obj = jsonAuthen.get(ConstantsIF.PASSWORD);
@@ -601,8 +581,9 @@ public class JsonResource extends Resource {
                config.setParam(ConstantsIF.AUTHEN + "." + ConstantsIF.PASSWORD, (String) obj);
             } else {
                this.abort(CLASS + ": " + METHOD,
-                     "Attribute '" + ConstantsIF.AUTHEN + "." + ConstantsIF.PASSWORD + "' is missing.",
-                     Status.BAD_REQUEST);
+                  "Attribute '" + ConstantsIF.AUTHEN + "." + ConstantsIF.PASSWORD
+                  + "' is missing.",
+                  Status.BAD_REQUEST);
             }
 
             obj = jsonAuthen.get(ConstantsIF.DATABASE);
@@ -610,17 +591,20 @@ public class JsonResource extends Resource {
                config.setParam(ConstantsIF.AUTHEN + "." + ConstantsIF.DATABASE, (String) obj);
             } else {
                this.abort(CLASS + ": " + METHOD,
-                     "Attribute '" + ConstantsIF.AUTHEN + "." + ConstantsIF.DATABASE + "' is missing.",
-                     Status.BAD_REQUEST);
+                  "Attribute '" + ConstantsIF.AUTHEN + "." + ConstantsIF.DATABASE 
+                     + "' is missing.",
+                  Status.BAD_REQUEST);
             }
          } else {
             this.abort(CLASS + ": " + METHOD,
-                  "Collection '" + collection + "' not found for database '" + database + "'",
-                  Status.INTERNAL_SERVER_ERROR);
+               "Collection '" + collection + "' not found for database '" 
+                  + database + "'",
+               Status.INTERNAL_SERVER_ERROR);
          }
       } else {
-         this.abort(CLASS + ": " + METHOD, "Config file not found for database '" + database + "'",
-               Status.INTERNAL_SERVER_ERROR);
+         this.abort(CLASS + ": " + METHOD, "Config file not found for database '" 
+            + database + "'",
+            Status.INTERNAL_SERVER_ERROR);
       }
 
       _logger.exiting(CLASS, METHOD);
@@ -628,12 +612,6 @@ public class JsonResource extends Resource {
       return config;
    }
 
-   /**
-    * Get the value of the URL parameter path name
-    * 
-    * @param name String name of the parameter path
-    * @return String parameter path value
-    */
    private String getParamPathValue(final String name) {
       String METHOD = Thread.currentThread().getStackTrace()[1].getMethodName();
       String value = null;
@@ -643,13 +621,15 @@ public class JsonResource extends Resource {
       _logger.entering(CLASS, METHOD);
 
       if (STR.isEmpty(name)) {
-         this.abort(CLASS + ": " + METHOD, ": Path parameter name is empty.", Status.BAD_REQUEST);
+         this.abort(CLASS + ": " + METHOD, ": Path parameter name is empty.",
+            Status.BAD_REQUEST);
       }
 
       mvMap = _uriInfo.getPathParameters();
 
       if (mvMap == null || mvMap.size() == 0) {
-         this.abort(CLASS + ": " + METHOD, ": Path parameters are empty.", Status.BAD_REQUEST);
+         this.abort(CLASS + ": " + METHOD, ": Path parameters are empty.",
+            Status.BAD_REQUEST);
       }
 
       list = mvMap.get(name);
@@ -657,15 +637,17 @@ public class JsonResource extends Resource {
       if (list != null && list.size() > 0) {
          value = list.get(0);
          if (STR.isEmpty(value)) {
-            this.abort(CLASS + ": " + METHOD, ": Path value for '" + name + "' is empty.", Status.BAD_REQUEST);
+            this.abort(CLASS + ": " + METHOD, ": Path value for '" + name
+               + "' is empty.", Status.BAD_REQUEST);
          }
       } else {
-         this.abort(CLASS + ": " + METHOD, ": Path for '" + name + "' is missing.", Status.BAD_REQUEST);
+         this.abort(CLASS + ": " + METHOD, ": Path for '" + name + "' is missing.", 
+            Status.BAD_REQUEST);
       }
 
       if (_logger.isLoggable(DEBUG_LEVEL)) {
          _logger.log(DEBUG_LEVEL, "name=''{0}'', value=''{1}''",
-               new Object[] { name != null ? name : NULL, value != null ? value : NULL });
+            new Object[]{name != null ? name : NULL, value != null ? value : NULL});
       }
 
       _logger.exiting(CLASS, METHOD);
@@ -673,11 +655,6 @@ public class JsonResource extends Resource {
       return value;
    }
 
-   /**
-    * Set the MongoDB database and collection in the OperationIF object
-    * 
-    * @param oper OpertaionIF object
-    */
    private void setParameters(final OperationIF oper) {
       String METHOD = Thread.currentThread().getStackTrace()[1].getMethodName();
       String value = null;
