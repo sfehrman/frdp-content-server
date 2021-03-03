@@ -47,6 +47,7 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 
 COPY --from=build /frdp-content-server/target/content-server /usr/local/tomcat/webapps/content-server
 
-EXPOSE 8085:8080
+# EXPOSE 8085:8080
+EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
